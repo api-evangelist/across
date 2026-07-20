@@ -1,0 +1,32 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.across.to/introduction/api-keys
+provider: Across
+api: Across Swap API
+docs: https://docs.across.to/introduction/api-keys
+summary: >-
+  Production use of the Across Swap API requires two credentials: an API key
+  passed as a Bearer token in the Authorization header, and a 2-byte hex
+  integratorId. Testnet requires no credentials.
+schemes:
+- type: http
+  scheme: bearer
+  name: Authorization
+  in: header
+  required_for: production
+  format: 'Authorization: Bearer [example key]'
+  description: API key issued per integrator; sent on every API call.
+- type: apiKey
+  name: integratorId
+  in: query
+  required_for: production
+  format: 2-byte hex identifier (e.g. 0xdead, 0x0001, 0xffff)
+  description: >-
+    Unique integrator identifier. Passed as the integratorId query parameter on
+    Swap API calls; for direct contract integration it is appended to calldata
+    prefixed with the delimiter 1dc0de (without the 0x prefix).
+notes:
+- Testnet does not require an API key or integrator ID.
+- Requests without valid credentials are subject to strict rate limits; authenticated requests receive higher allowances.
+- Exceeding limits returns HTTP 429 Too Many Requests.
+credentials_request: https://docs.across.to/introduction/api-keys
