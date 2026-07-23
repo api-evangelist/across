@@ -1,0 +1,27 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.across.to/introduction/audits
+provider: Across
+trust_page: https://docs.across.to/introduction/audits
+certifications: []
+compliance_programs: []
+audits:
+- name: Across V3 and Oval Incremental Audit
+  firm: OpenZeppelin
+  report: https://blog.openzeppelin.com/across-v3-and-oval-incremental-audit
+- name: Across V3 Audit
+  firm: OpenZeppelin
+  report: https://blog.openzeppelin.com/across-v3-incremental-audit
+- name: Across Token and Token Distributor Audit
+  firm: OpenZeppelin
+  report: https://blog.openzeppelin.com/across-token-and-token-distributor-audit/
+- name: Across V2 Audit
+  firm: OpenZeppelin
+  report: https://blog.openzeppelin.com/uma-across-v2-audit/
+related_audits:
+  note: Across settlement relies on UMA's Optimistic Oracle, also audited by OpenZeppelin (Optimistic Oracle continuous audit, L2 Bridges, Phase 4, Phase 6).
+notes: >-
+  Across publishes smart-contract security audits by OpenZeppelin. No formal
+  compliance certifications (SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP) are
+  published — as a decentralized protocol, assurance is provided via public
+  audits and an on-chain bug bounty.

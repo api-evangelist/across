@@ -1,0 +1,41 @@
+generated: '2026-07-17'
+method: searched
+source: https://www.npmjs.com/org/across-protocol ; https://github.com/across-protocol ; https://docs.across.to/reference/sdk
+provider: Across
+registries:
+- npm
+packages:
+- name: '@across-protocol/app-sdk'
+  registry: npm
+  language: typescript
+  official: true
+  version: 0.6.1
+  description: The official SDK for integrating the Across bridge into your dapp (high-level quote/execute client).
+  url: https://www.npmjs.com/package/@across-protocol/app-sdk
+  repository: https://github.com/across-protocol/toolkit
+  homepage: https://docs.across.to/reference/sdk
+- name: '@across-protocol/sdk'
+  registry: npm
+  language: typescript
+  official: true
+  version: 4.4.13
+  description: Shared logic and utility libraries for Across — quoting, fee calculation, and protocol helpers.
+  url: https://www.npmjs.com/package/@across-protocol/sdk
+  repository: https://github.com/across-protocol/sdk
+  homepage: https://docs.across.to/reference/sdk
+- name: '@across-protocol/constants'
+  registry: npm
+  language: typescript
+  official: true
+  version: 3.1.123
+  description: Commonly re-used constant values (chain IDs, token addresses, deployments) for Across integrations.
+  url: https://www.npmjs.com/package/@across-protocol/constants
+  repository: https://github.com/across-protocol/constants
+- name: '@across-protocol/contracts'
+  registry: npm
+  language: typescript
+  official: true
+  version: 5.0.24
+  description: TypeScript typings and ABIs for the Across on-chain smart contracts (SpokePool, HubPool).
+  url: https://www.npmjs.com/package/@across-protocol/contracts
+  repository: https://github.com/across-protocol/across-smart-contracts-v2

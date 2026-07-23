@@ -1,27 +1,103 @@
 aid: across
 name: Across
-description: 'Across is a company surfaced as a portfolio company of paradigm and added to the API Evangelist
-  network as a stub for enrichment. Sector: crypto-infrastructure. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: Across is a crosschain interoperability protocol powering fast, low-cost token transfers and swaps across 20+ EVM chains and Solana. Built on an intents-based design with a permissionless relayer network and UMA optimistic oracle settlement, Across fills crosschain transfers in roughly two seconds with no custodial risk. Developers integrate a single unified Swap API (plus embedded crosschain actions, gasless flows, and deposit tracking) to move native USDC, USDT, ETH, and other assets between Ethereum, Arbitrum, Base, Optimism, Polygon, Solana, and more. The protocol has facilitated over $36 billion in volume for 5M+ users. Across is a Paradigm portfolio company in the crypto-infrastructure sector.
 url: https://raw.githubusercontent.com/api-evangelist/across/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://across.to/logo.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - paradigm
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-public-surface
 specificationVersion: '0.20'
 created: '2026-07-17'
 modified: '2026-07-17'
 tags:
 - Company
 - Crypto Infrastructure
-apis: []
+- Cross Chain
+- Bridge
+- Interoperability
+- Blockchain
+- DeFi
+- Web3
+- Swap
+- Payments
+apis:
+- name: Across Swap API
+  description: The unified REST entry point for all crosschain operations on Across — request swap/bridge quotes and approval data, execute embedded crosschain actions on the destination chain, run gasless flows, enumerate supported chains/tokens/sources, and track deposit lifecycle status. Authentication is a Bearer API key plus a 2-byte hex integratorId query parameter; testnet requires no credentials.
+  humanURL: https://docs.across.to/introduction/swap-api
+  baseURL: https://app.across.to/api
+  tags:
+  - Cross Chain
+  - Bridge
+  - Swap
+  - Payments
+  properties:
+  - type: Documentation
+    url: https://docs.across.to
+  - type: APIReference
+    url: https://docs.across.to/api-reference
+  - type: GettingStarted
+    url: https://docs.across.to/introduction
+  - type: Authentication
+    url: authentication/across-authentication.yml
+  - type: Conventions
+    url: conventions/across-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/across-domain-security.yml
 - type: Website
   url: https://across.to
+- type: Documentation
+  url: https://docs.across.to
+- type: APIReference
+  url: https://docs.across.to/api-reference
+- type: GettingStarted
+  url: https://docs.across.to/introduction
+- type: Blog
+  url: https://across.to/blog
+- type: GitHubOrganization
+  url: https://github.com/across-protocol
+- type: SignUp
+  url: https://docs.across.to/introduction/api-keys
+- type: MCPServer
+  url: mcp/across-mcp.yml
+- type: SDKs
+  url: packages/across-packages.yml
+- type: Packages
+  url: packages/across-packages.yml
+- type: LLMsTxt
+  url: llms/across-llms.txt
+- type: Authentication
+  url: authentication/across-authentication.yml
+- type: Conventions
+  url: conventions/across-conventions.yml
+- type: VulnerabilityDisclosure
+  url: security/across-vulnerability-disclosure.yml
+- type: Security
+  url: security/across-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/across-trust-center.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

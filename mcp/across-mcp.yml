@@ -1,0 +1,49 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/across-protocol/mcp-server-across
+provider: Across
+name: Across Protocol MCP Server
+status: official
+hosting: hosted-remote
+transport: streamable-http
+endpoint: https://mcp.across.to/mcp
+repository: https://github.com/across-protocol/mcp-server-across
+package: mcp-server-across
+install:
+  hosted:
+    mcpServers:
+      across-docs:
+        url: https://mcp.across.to/mcp
+  npx: npx -y mcp-server-across
+description: >-
+  Official Across MCP server that indexes the Across documentation and exposes
+  live Swap API operations as tools. Works with Claude Desktop, Claude Code,
+  Cursor, Codex, and Windsurf. A production instance is hosted at
+  https://mcp.across.to/mcp over Streamable HTTP.
+tools:
+- name: search_across_docs
+  description: TF-IDF search across indexed Across documentation.
+- name: get_page
+  description: Fetch full content of a documentation page.
+- name: get_code_examples
+  description: SDK and integration code examples by topic.
+- name: recrawl_docs
+  description: Trigger a background re-crawl of the documentation.
+- name: get_supported_chains
+  description: List chains supported by the live Across API (mainnet + testnet).
+- name: get_api_reference
+  description: Retrieve the Across API reference.
+- name: get_suggested_fees
+  description: Get suggested relayer/LP fees for a route.
+- name: get_swap_quote
+  description: Get a crosschain swap/bridge quote.
+- name: track_deposit
+  description: Track the lifecycle status of a deposit.
+- name: list_deposits
+  description: List deposits for a depositor.
+- name: get_available_routes
+  description: Enumerate available crosschain routes.
+- name: get_limits
+  description: Get transfer limits for a route.
+- name: swap_with_wallet
+  description: Open an interactive swap view with WalletConnect wallet integration inside the conversation.

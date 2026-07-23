@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.across.to/api-reference ; https://docs.across.to/introduction/api-keys ; https://docs.across.to/introduction/tracking-deposits
+provider: Across
+api: Across Swap API
+base_url: https://app.across.to/api
+conventions:
+  auth:
+    style: bearer-token-plus-integrator-id
+    header: 'Authorization: Bearer <API_KEY>'
+    integrator_id: integratorId query parameter (2-byte hex)
+    testnet: no credentials required
+    ref: authentication/across-authentication.yml
+  transport:
+    protocol: https
+    formats:
+    - application/json
+  rate_limiting:
+    signaled_by: HTTP 429 Too Many Requests
+    policy: unauthenticated requests strictly limited; authenticated keys receive higher allowances
+  versioning:
+    style: path-and-endpoint
+    notes: >-
+      Suggested-fees / available-routes / limits are documented as the legacy
+      surface; the unified Swap API (/swap/*) is the current entry point.
+  idempotency:
+    supported: false
+    notes: No idempotency-key mechanism is documented; quote endpoints are read-oriented and deposits are settled on-chain by transaction hash.
+  pagination:
+    documented: false
+    notes: The deposits listing (GET /deposits) is filtered by depositor; no page/cursor parameters are documented.
+  tracing:
+    request_id: not documented
+  error_envelope:
+    style: json
+    notes: Errors returned as JSON with HTTP status codes; see errors reference in docs. No RFC 9457 problem+json declared.
+  endpoints_reference: https://docs.across.to/api-reference
