@@ -3,7 +3,8 @@ method: searched
 source: https://github.com/across-protocol/mcp-server-across
 provider: Across
 name: Across Protocol MCP Server
-status: official
+status: published
+status_raw: official
 hosting: hosted-remote
 transport: streamable-http
 endpoint: https://mcp.across.to/mcp
@@ -15,11 +16,9 @@ install:
       across-docs:
         url: https://mcp.across.to/mcp
   npx: npx -y mcp-server-across
-description: >-
-  Official Across MCP server that indexes the Across documentation and exposes
-  live Swap API operations as tools. Works with Claude Desktop, Claude Code,
-  Cursor, Codex, and Windsurf. A production instance is hosted at
-  https://mcp.across.to/mcp over Streamable HTTP.
+description: Official Across MCP server that indexes the Across documentation and exposes live Swap API
+  operations as tools. Works with Claude Desktop, Claude Code, Cursor, Codex, and Windsurf. A production
+  instance is hosted at https://mcp.across.to/mcp over Streamable HTTP.
 tools:
 - name: search_across_docs
   description: TF-IDF search across indexed Across documentation.
@@ -47,3 +46,11 @@ tools:
   description: Get transfer limits for a route.
 - name: swap_with_wallet
   description: Open an interactive swap view with WalletConnect wallet integration inside the conversation.
+deployment:
+  mode: remote
+  endpoint: https://mcp.across.to/mcp
+  verified: probed
+  probe: live
+  tools: 14
+  checked: '2026-08-12'
+  source: catalog MCP census
