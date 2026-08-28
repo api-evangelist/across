@@ -2,6 +2,17 @@ aid: across
 name: Across
 description: Across is a crosschain interoperability protocol powering fast, low-cost token transfers and swaps across 20+ EVM chains and Solana. Built on an intents-based design with a permissionless relayer network and UMA optimistic oracle settlement, Across fills crosschain transfers in roughly two seconds with no custodial risk. Developers integrate a single unified Swap API (plus embedded crosschain actions, gasless flows, and deposit tracking) to move native USDC, USDT, ETH, and other assets between Ethereum, Arbitrum, Base, Optimism, Polygon, Solana, and more. The protocol has facilitated over $36 billion in volume for 5M+ users. Across is a Paradigm portfolio company in the crypto-infrastructure sector.
 url: https://raw.githubusercontent.com/api-evangelist/across/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
