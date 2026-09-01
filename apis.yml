@@ -38,7 +38,7 @@ modified: '2026-07-17'
 tags:
 - Company
 - Crypto Infrastructure
-- Cross Chain
+- Cross-Chain
 - Bridge
 - Interoperability
 - Blockchain
@@ -63,7 +63,7 @@ apis:
   humanURL: https://docs.across.to/introduction/swap-api
   baseURL: https://app.across.to/api
   tags:
-  - Cross Chain
+  - Cross-Chain
   - Bridge
   - Swap
   - Payments
