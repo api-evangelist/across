@@ -21,31 +21,45 @@ description: Official Across MCP server that indexes the Across documentation an
   instance is hosted at https://mcp.across.to/mcp over Streamable HTTP.
 tools:
 - name: search_across_docs
-  description: TF-IDF search across indexed Across documentation.
+  description: Full-text search across the Across Protocol documentation. Use for any conceptual or how-to
+    question about Across.
 - name: get_page
-  description: Fetch full content of a documentation page.
+  description: Get the full content of a specific Across documentation page. Accepts a path like '/reference/api-reference'
+    or a keyword match. Prefer reading the `across://docs/...` resource directly when the path is known.
 - name: get_code_examples
-  description: SDK and integration code examples by topic.
+  description: Get code examples from Across docs. Filter by topic like 'sdk', 'swap', 'deposit', 'viem',
+    'ethers'.
 - name: recrawl_docs
-  description: Trigger a background re-crawl of the documentation.
+  description: Kick off a background re-crawl of all Across documentation pages. Returns immediately;
+    the index updates when the crawl completes.
 - name: get_supported_chains
-  description: List chains supported by the live Across API (mainnet + testnet).
+  description: List all chains supported by Across with their chain IDs, fetched live from the Across
+    API.
 - name: get_api_reference
-  description: Retrieve the Across API reference.
+  description: Get the Across REST API endpoint catalog. Pass an `endpoint` to filter; leave empty to
+    list all.
 - name: get_suggested_fees
-  description: Get suggested relayer/LP fees for a route.
+  description: Live quote of bridge fees for a single-token transfer between two Across-supported chains.
 - name: get_swap_quote
-  description: Get a crosschain swap/bridge quote.
+  description: Build a crosschain swap on Across. Returns the expected output, fees, and ready-to-sign
+    calldata (`approvalTxns` + deposit `tx`). The client/user signs and broadcasts.
 - name: track_deposit
-  description: Track the lifecycle status of a deposit.
+  description: Look up the lifecycle status of an Across deposit by origin-chain tx hash or deposit ID.
 - name: list_deposits
-  description: List deposits for a depositor.
+  description: Return recent Across deposits for a given depositor address.
 - name: get_available_routes
-  description: Enumerate available crosschain routes.
+  description: Discover supported (origin, destination, token) routes. All filters are optional; omit
+    to list every route.
 - name: get_limits
-  description: Get transfer limits for a route.
+  description: Get the min/max transferrable amount for a given token between two chains.
 - name: swap_with_wallet
-  description: Open an interactive swap view with WalletConnect wallet integration inside the conversation.
+  description: Open an interactive crosschain-swap view in the conversation. Fetches a live Across quote
+    and renders a UI where the user verifies details, connects their wallet, and signs the deposit themselves.
+    Use this when the user wants to actually execute a swap (not just see calldata). EVM mainnet origins
+    only — the wallet connects via WalletConnect's Ethereum provider, so non-EVM chains (Solana, TRON)
+    cannot be the origin here (they can be the destination). For non-EVM origins use get_swap_quote instead.
+- name: track_deposit_app
+  description: 'Internal: deposit-status lookup used by the swap UI to poll fill progress.'
 deployment:
   mode: remote
   endpoint: https://mcp.across.to/mcp
@@ -79,3 +93,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 14
