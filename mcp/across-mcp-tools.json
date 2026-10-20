@@ -1,0 +1,513 @@
+{
+  "endpoint": "https://mcp.across.to/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "mcp-server-across",
+    "version": "2.0.0"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "search_across_docs",
+        "title": "Search Across docs",
+        "description": "Full-text search across the Across Protocol documentation. Use for any conceptual or how-to question about Across.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query (e.g. 'suggested fees', 'cross-chain swap', 'relayer setup')"
+            },
+            "limit": {
+              "type": "number",
+              "default": 5,
+              "description": "Max results (default 5)"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_page",
+        "title": "Get a doc page",
+        "description": "Get the full content of a specific Across documentation page. Accepts a path like '/reference/api-reference' or a keyword match. Prefer reading the `across://docs/...` resource directly when the path is known.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Page path or keyword"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_code_examples",
+        "title": "Get code examples",
+        "description": "Get code examples from Across docs. Filter by topic like 'sdk', 'swap', 'deposit', 'viem', 'ethers'.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "topic": {
+              "type": "string",
+              "description": "Optional topic filter"
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "recrawl_docs",
+        "title": "Recrawl docs (async)",
+        "description": "Kick off a background re-crawl of all Across documentation pages. Returns immediately; the index updates when the crawl completes.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_supported_chains",
+        "title": "Supported chains",
+        "description": "List all chains supported by Across with their chain IDs, fetched live from the Across API.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet",
+                "all"
+              ],
+              "default": "all",
+              "description": "Filter by network type"
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_api_reference",
+        "title": "Across API reference",
+        "description": "Get the Across REST API endpoint catalog. Pass an `endpoint` to filter; leave empty to list all.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "Optional endpoint path filter (e.g. '/suggested-fees')"
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_suggested_fees",
+        "title": "Get suggested bridge fees",
+        "description": "Live quote of bridge fees for a single-token transfer between two Across-supported chains.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Token address on the origin chain"
+            },
+            "originChainId": {
+              "type": "number"
+            },
+            "destinationChainId": {
+              "type": "number"
+            },
+            "amount": {
+              "type": "string",
+              "description": "Amount in smallest unit (wei for ETH, etc.)"
+            },
+            "recipient": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string",
+              "description": "Optional message/calldata to forward to the destination"
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet"
+              ],
+              "default": "mainnet",
+              "description": "'mainnet' (default) or 'testnet'"
+            }
+          },
+          "required": [
+            "token",
+            "originChainId",
+            "destinationChainId",
+            "amount"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_swap_quote",
+        "title": "Get crosschain swap quote with calldata",
+        "description": "Build a crosschain swap on Across. Returns the expected output, fees, and ready-to-sign calldata (`approvalTxns` + deposit `tx`). The client/user signs and broadcasts.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "inputToken": {
+              "type": "string",
+              "description": "Input token address on origin chain"
+            },
+            "outputToken": {
+              "type": "string",
+              "description": "Output token address on destination chain"
+            },
+            "originChainId": {
+              "type": "number"
+            },
+            "destinationChainId": {
+              "type": "number"
+            },
+            "amount": {
+              "type": "string",
+              "description": "Amount in smallest unit; interpretation depends on tradeType"
+            },
+            "depositor": {
+              "type": "string",
+              "description": "Address that will sign and submit the deposit"
+            },
+            "recipient": {
+              "type": "string",
+              "description": "Recipient on destination chain (defaults to depositor)"
+            },
+            "tradeType": {
+              "type": "string",
+              "enum": [
+                "exactInput",
+                "exactOutput",
+                "minOutput"
+              ],
+              "description": "Trade type (default minOutput, Across's recommended default)"
+            },
+            "slippage": {
+              "type": "string",
+              "description": "'auto' (default) or a decimal between 0 and 1 (e.g. '0.01' = 1%)"
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet"
+              ],
+              "default": "mainnet",
+              "description": "'mainnet' (default) or 'testnet'"
+            }
+          },
+          "required": [
+            "inputToken",
+            "outputToken",
+            "originChainId",
+            "destinationChainId",
+            "amount",
+            "depositor"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "track_deposit",
+        "title": "Track an Across deposit",
+        "description": "Look up the lifecycle status of an Across deposit by origin-chain tx hash or deposit ID.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "depositTxHash": {
+              "type": "string"
+            },
+            "depositId": {
+              "type": "string"
+            },
+            "originChainId": {
+              "type": "number"
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet"
+              ],
+              "default": "mainnet",
+              "description": "'mainnet' (default) or 'testnet'"
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "list_deposits",
+        "title": "List deposits for an address",
+        "description": "Return recent Across deposits for a given depositor address.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "depositor": {
+              "type": "string",
+              "description": "Depositor address"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "filled",
+                "refunded",
+                "expired"
+              ]
+            },
+            "limit": {
+              "type": "number",
+              "description": "Max results (default 25)"
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet"
+              ],
+              "default": "mainnet",
+              "description": "'mainnet' (default) or 'testnet'"
+            }
+          },
+          "required": [
+            "depositor"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_available_routes",
+        "title": "List available Across routes",
+        "description": "Discover supported (origin, destination, token) routes. All filters are optional; omit to list every route.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "originChainId": {
+              "type": "number"
+            },
+            "destinationChainId": {
+              "type": "number"
+            },
+            "originToken": {
+              "type": "string"
+            },
+            "destinationToken": {
+              "type": "string"
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet"
+              ],
+              "default": "mainnet",
+              "description": "'mainnet' (default) or 'testnet'"
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "get_limits",
+        "title": "Get transfer limits for a route",
+        "description": "Get the min/max transferrable amount for a given token between two chains.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Token address on the origin chain"
+            },
+            "originChainId": {
+              "type": "number"
+            },
+            "destinationChainId": {
+              "type": "number"
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "mainnet",
+                "testnet"
+              ],
+              "default": "mainnet",
+              "description": "'mainnet' (default) or 'testnet'"
+            }
+          },
+          "required": [
+            "token",
+            "originChainId",
+            "destinationChainId"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      },
+      {
+        "name": "swap_with_wallet",
+        "title": "Swap with wallet (interactive)",
+        "description": "Open an interactive crosschain-swap view in the conversation. Fetches a live Across quote and renders a UI where the user verifies details, connects their wallet, and signs the deposit themselves. Use this when the user wants to actually execute a swap (not just see calldata). EVM mainnet origins only — the wallet connects via WalletConnect's Ethereum provider, so non-EVM chains (Solana, TRON) cannot be the origin here (they can be the destination). For non-EVM origins use get_swap_quote instead.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "inputToken": {
+              "type": "string",
+              "description": "Input token address on origin chain"
+            },
+            "outputToken": {
+              "type": "string",
+              "description": "Output token address on destination chain"
+            },
+            "originChainId": {
+              "type": "number"
+            },
+            "destinationChainId": {
+              "type": "number"
+            },
+            "amount": {
+              "type": "string",
+              "description": "Amount in smallest unit; interpretation depends on tradeType"
+            },
+            "depositor": {
+              "type": "string",
+              "description": "Address that will sign and submit the deposit"
+            },
+            "recipient": {
+              "type": "string",
+              "description": "Recipient on destination chain (defaults to depositor)"
+            },
+            "tradeType": {
+              "type": "string",
+              "enum": [
+                "exactInput",
+                "exactOutput",
+                "minOutput"
+              ],
+              "description": "Trade type (default minOutput)"
+            },
+            "slippage": {
+              "type": "string",
+              "description": "'auto' (default) or a decimal between 0 and 1"
+            }
+          },
+          "required": [
+            "inputToken",
+            "outputToken",
+            "originChainId",
+            "destinationChainId",
+            "amount",
+            "depositor"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "_meta": {
+          "ui": {
+            "resourceUri": "ui://across/swap.html"
+          },
+          "ui/resourceUri": "ui://across/swap.html"
+        }
+      },
+      {
+        "name": "track_deposit_app",
+        "title": "Track deposit (app)",
+        "description": "Internal: deposit-status lookup used by the swap UI to poll fill progress.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "depositTxHash": {
+              "type": "string"
+            },
+            "originChainId": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "depositTxHash",
+            "originChainId"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "_meta": {
+          "ui": {
+            "visibility": [
+              "app"
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
